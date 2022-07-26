@@ -1,16 +1,24 @@
+<div class="container">
 
-<%= render 'notice' %>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <%= render 'shared/errors' %>
 
-<%= form_with(model: @article, local: true) do |f|%>
-    <p>
-        <%= f.label :title %><br/>
-        <%= f.text_field :title %>
-    </p>
-    <p>
-        <%= f.label :description %><br/>
-        <%= f.text_area :description %>
-    </p>
-    <p>
-        <%= f.submit %>
-    </p>
-<% end %>
+            <%= form_with(model: @article, local: true) do |f|%>
+                <div class="form-group mb-3">
+                    <%= f.label :title, class:"form-label" %><br/>
+                    <%= f.text_field :title, class: "form-control", placeholder: "Title"  %>
+                </div>
+                
+                <div class="form-group mb-3">
+                    <%= f.label :description, class:"form-label"%><br/>
+                    <%= f.text_area :description, rows: 10, class:"form-control", placeholder: "Description" %>
+                </div>
+
+                <div class="form-group">
+                    <%= f.submit class: "btn btn-outline-success" %>
+                </div>
+            <% end %>
+        </div>
+    </div>
+</div>
