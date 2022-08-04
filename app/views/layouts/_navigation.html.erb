@@ -15,18 +15,27 @@
                             Articles
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><%= link_to "Create article", new_article_path, class: "dropdown-item"%></li>
-                            <li><%= link_to "View articles", articles_path, class: "dropdown-item"%></li>
+                            <% if logged_in? %>
+                                <li><%= link_to "Create article", new_article_path, class: "dropdown-item" %></li>
+                            <% end %>
+                            <li><%= link_to "View articles", articles_path, class: "dropdown-item" %></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><a class="dropdown-item" href="#">Something else here</a></li>
                         </ul>
                     </li>
                     <% if logged_in? %>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <%= current_user.username %> <%= "(Admin)" if current_user.admin? %>
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><%= link_to "Your profile", user_path(current_user), class: "dropdown-item" %></li>
+                                <li><%= link_to "Edit profile", edit_user_path(current_user), class: "dropdown-item" %></li>
+                                <li><%= link_to "Delete profile", user_path(current_user), class: "dropdown-item text-danger", data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete your profile?" } %>
+                            </ul>
+                        </li>                    
                         <li class="nav-item">
-                            <%= link_to current_user.username, user_path(current_user), class: "nav-link" %>
-                        </li>
-                        <li class="nav-item">
-                            <%= link_to 'Logout', logout_path, class: "nav-link", method: :delete, data: { turbo_method: :delete } %>
+                            <%= link_to 'Logout', logout_path, class: "nav-link", data: { turbo_method: :delete } %>
                         </li>
                     <% else %>
                         <li class="nav-item">
