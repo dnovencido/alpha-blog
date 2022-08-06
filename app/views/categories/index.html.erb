@@ -1,0 +1,23 @@
+<div id="page-content">
+    <h1 class="text-center mt-4">Categories</h1>
+    <div class="container py-3">
+    <% @categories.each do |category| %>
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= link_to category.name, category_path(category), class: "link-dark"%></h5>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <small>Created <%= time_ago_in_words(category.created_at) %> ago </small> |
+                        <small>Edited <%= time_ago_in_words(category.updated_at) %> ago </small>
+                    </div>
+                </div>            
+            </div>
+        </div>
+    <% end %>
+    <div class="apple_pagination">
+        <%= will_paginate @acategories, :container => false %>
+    </div>
+    </div>
+</div>
