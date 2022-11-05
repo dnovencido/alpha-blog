@@ -17,6 +17,6 @@ class SessionsController < ApplicationController
     def destroy
         session[:user_id] = nil
         flash[:notice] = "Logged out"
-        redirect_to _path, status: :see_other
+        redirect_to login_path, status: :see_other
     end
 end
